@@ -68,4 +68,11 @@ export const nameToKey = (name: string): string | undefined => {
   return v;
 };
 
+// List of possible modes & scales
+// Name: [interval structure]
+export const MODES = {
+  Ionian: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7'],
+  Aeolian: ['P1', 'M2', 'm3', 'P4', 'P5', 'm6', 'm7'],
+};
+
 export const QUALITIES = [MAJOR, MINOR, PERFECT, AUG, DIM];
