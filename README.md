@@ -23,9 +23,9 @@ yarn add @davidfloegel/harmonie
 
 ### Notes
 
-#### Instantiating a note
+#### Creating a note
 ```typescript
-// standard
+// by name with default octave
 const noteEb = new Note('Eb')
 
 // change octave
@@ -48,4 +48,61 @@ Sometimes (mostly in classical music) you will come across notations such as `Fb
 ```typescript
 const note = new Note(B#)
 note.easyNotation // C
+```
+
+### Intervals
+
+#### Creating an interval
+```typescript
+// by quality and quantity
+const P4 = new Interval('P', 4)
+
+// from string
+const M3 = Interval.fromString('M3')
+```
+
+#### Properties
+```typescript
+const interval = new Interval('m', 6)
+
+interval.name // m6
+interval.fullName // minor 6
+interval.quality // m
+interval.quantity // 6
+interval.semitones // 8
+```
+
+#### Inverting an interval
+```typescript
+const interval = new Interval('M', 3)
+const inversion = interval.invert()
+
+inversion.name // 'm6'
+```
+
+#### Adding an interval to a note
+```typescript
+const root = new Note('E')
+const interval = Interval.fromString('P5')
+
+const target = root.addInterval(interval)
+target.name // B
+```
+
+#### Subtracting an interval from a note
+```typescript
+const root = new Note('E')
+const interval = Interval.fromString('P5')
+
+const target = root.addInterval(interval)
+target.name // A
+```
+
+#### Determining the interval between two notes
+```
+const noteA = new Note('D')
+const noteB = new Note('B')
+
+const interval = noteA.minusNote(noteB)
+interval.name // M6
 ```
