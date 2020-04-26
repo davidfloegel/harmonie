@@ -33,6 +33,7 @@ export default class Interval {
   quality: string;
   quantity: number;
   name: string;
+  isCompound: boolean;
   fullName: string;
   semitones: number;
 
@@ -41,21 +42,32 @@ export default class Interval {
       throw Error('Quality invalid');
     }
 
-    if (quantity < 1 || quantity > 8) {
+    if (quantity < 1 || quantity > 14) {
       throw Error('Quantity invalid');
     }
+
+    this.isCompound = quantity > 8;
 
     this.quality = quality;
     this.quantity = quantity;
     this.name = `${quality}${quantity}`;
+    const lookupName = `${quality}${quantity - (this.isCompound ? 7 : 0)}`;
 
-    if (!IntervalDict[this.name]) {
+    if (!IntervalDict[lookupName]) {
       throw Error(`Interval ${this.name} invalid`);
     }
 
-    const interval = IntervalDict[this.name];
+    const interval = IntervalDict[lookupName];
     this.fullName = interval.name;
-    this.semitones = interval.semitones;
+    if (this.isCompound) {
+      const r = /([1-8])/;
+      const r2 = interval.name.replace(r, quantity);
+      const r3 = /(st|nd|rd|th)/;
+      const r4 = r2.replace(r3, 'th');
+      this.fullName = r4;
+    }
+
+    this.semitones = interval.semitones + (this.isCompound ? 12 : 0);
   }
 
   // Create a new interval based on quantity and number of semitones
@@ -83,11 +95,7 @@ export default class Interval {
 
   // Create a new interval from string (i.e. M3)
   static fromString(interval: string): Interval {
-    if (!IntervalDict[interval]) {
-      throw Error(`Interval ${interval} invalid`);
-    }
-
-    const quantity = parseInt(interval.substring(1, 2), 10);
+    const quantity = parseInt(interval.substring(1, interval.length), 10);
     const quality = interval.substring(0, 1);
 
     return new Interval(quality, quantity);

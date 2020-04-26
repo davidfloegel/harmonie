@@ -189,4 +189,16 @@ describe('Interval', () => {
     const P4 = Interval.fromString('P4');
     expect(P4.invert().name).toBe('P5');
   });
+
+  describe('compound intervals', () => {
+    it('initialises a new interval with quality and quantity', () => {
+      const M9 = new Interval('M', 9);
+      expect(M9.name).toBe('M9');
+      expect(M9.quality).toBe('M');
+      expect(M9.quantity).toBe(9);
+      expect(M9.isCompound).toBe(true);
+      expect(M9.fullName).toBe('Major 9th');
+      expect(M9.semitones).toBe(14);
+    });
+  });
 });
