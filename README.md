@@ -19,6 +19,18 @@ npm add @davidfloegel/harmonie
 yarn add @davidfloegel/harmonie
 ```
 
+## To Do List
+
+- [ ] Clean up & restructure test suite
+- [ ] Add commitlint
+- [ ] Publish to NPM
+- [ ] Add JSDOC
+- [ ] Add chords
+- [ ] Add more scales
+- [ ] Add key signatures
+- [ ] Add transpose function
+- [ ] Add compound intervals
+
 ## Usage
 
 ### Notes
