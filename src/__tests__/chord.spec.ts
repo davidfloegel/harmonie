@@ -9,6 +9,12 @@ const genCases = (cases: object): void => {
 };
 
 describe('Chord', () => {
+  it('throws an  error if the given chord quality is invalid', () => {
+    expect(() => {
+      new Chord('C', 'Undefined');
+    }).toThrowError();
+  });
+
   describe('Triads', () => {
     const cases = {
       '^': ['C', 'E', 'G'],
@@ -103,7 +109,7 @@ describe('Chord', () => {
     genCases(cases);
   });
 
-  describe.only('Inversions', () => {
+  describe('Inversions', () => {
     it('instantiates a new chord in a given inversion', () => {
       const first = new Chord('C', '^', 1);
       expect(first.inversion).toBe(1);
