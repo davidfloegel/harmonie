@@ -1,4 +1,4 @@
-import Scale from '../scale';
+import { Scale } from '../';
 
 describe('Scale', () => {
   it('generates the notes for a C Major Pentatonic Scale', () => {

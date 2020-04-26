@@ -1,5 +1,4 @@
-import Interval from '../interval';
-import Note from '../note';
+import { Note, Interval } from '../';
 
 const noteAdd = (root: string, interval: string): string =>
   new Note(root).addInterval(Interval.fromString(interval)).name;
@@ -19,9 +18,39 @@ describe('Interval', () => {
     expect(new Interval('d', 4).name).toBe('d4');
   });
 
+  it('throws an error if interval name is invalid', () => {
+    expect(() => {
+      Interval.fromString('P3');
+    }).toThrowError();
+  });
+
   it('initialises a new interval from string', () => {
     expect(Interval.fromString('P4').name).toEqual('P4');
     expect(Interval.fromString('M3').name).toEqual('M3');
+  });
+
+  it('throws an error if quality is invalid', () => {
+    expect(() => {
+      new Interval('F', 2);
+    }).toThrowError();
+  });
+
+  it('throws an error if quantity is invalid', () => {
+    expect(() => {
+      new Interval('M', 200);
+    }).toThrowError();
+  });
+
+  it('throws an error if quality and quantity combination is invalid', () => {
+    expect(() => {
+      new Interval('M', 8);
+    }).toThrowError();
+  });
+
+  it('throws an error if quantity and semitone combination is invalid', () => {
+    expect(() => {
+      Interval.fromQuantityAndSemitones(20, 8);
+    }).toThrowError();
   });
 
   it('initialises new interval from quantity and semitones', () => {
@@ -142,5 +171,22 @@ describe('Interval', () => {
     expect(minusNote('C', 'Fb3')).toEqual('A5');
     expect(minusNote('C', 'Eb3')).toEqual('M6');
     expect(minusNote('C', 'Db3')).toEqual('M7');
+  });
+
+  it('inverts a given interval', () => {
+    const M3 = Interval.fromString('M3');
+    expect(M3.invert().name).toBe('m6');
+
+    const m3 = Interval.fromString('m3');
+    expect(m3.invert().name).toBe('M6');
+
+    const d3 = Interval.fromString('d3');
+    expect(d3.invert().name).toBe('A6');
+
+    const A3 = Interval.fromString('A3');
+    expect(A3.invert().name).toBe('d6');
+
+    const P4 = Interval.fromString('P4');
+    expect(P4.invert().name).toBe('P5');
   });
 });

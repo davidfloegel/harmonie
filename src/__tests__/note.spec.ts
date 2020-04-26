@@ -1,6 +1,20 @@
-import Note from '../note';
+import { Note } from '../';
 
 describe('Note', () => {
+  it('throws an error if the given note is formatted incorrectly', () => {
+    expect(() => {
+      new Note('L');
+    }).toThrowError();
+
+    expect(() => {
+      new Note('F#b');
+    }).toThrowError();
+
+    expect(() => {
+      new Note('F11');
+    }).toThrowError();
+  });
+
   it('generates a note instance from semitones', () => {
     expect(Note.fromIndex(1)).toHaveProperty('name', 'C');
     expect(Note.fromIndex(2)).toHaveProperty('name', 'D');

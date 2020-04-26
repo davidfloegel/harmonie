@@ -1,6 +1,6 @@
 import { SHARP, DOUBLE_SHARP } from './music';
 
-export default class Accidentals {
+export default class Accidental {
   sanitised: string[];
   accidentals: string;
   value: number;

@@ -1,6 +1,6 @@
 import { SHARP, FLAT, DEFAULT_OCTAVE, NOTES, NOTE_KEYS } from './music';
 
-import Accidentals from './accidentals';
+import Accidentals from './accidental';
 import Interval from './interval';
 
 export default class Note {
@@ -16,15 +16,15 @@ export default class Note {
 
     const match = name.match(/^([A-G])([#xb]*)([1-8]?)$/);
 
-    if (match) {
-      this.letter = match[1];
-      this.accidentals = new Accidentals(match[2] || '');
-      this.octave = match[3] ? parseInt(match[3], 10) : octave;
-      this.midiValue = this.calcMidiValue();
-      this.easyNotation = this.generateEasyNotation();
-    } else {
+    if (!match) {
       throw Error(`Note format ${name} invalid`);
     }
+
+    this.letter = match[1];
+    this.accidentals = new Accidentals(match[2] || '');
+    this.octave = match[3] ? parseInt(match[3], 10) : octave;
+    this.midiValue = this.calcMidiValue();
+    this.easyNotation = this.generateEasyNotation();
   }
 
   calcMidiValue(): number {
