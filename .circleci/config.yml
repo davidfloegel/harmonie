@@ -17,6 +17,7 @@ jobs:
   deploy:
     executor:
       name: node/default
+    working_directory: ~/repo
     steps:
       - checkout
       - run:
