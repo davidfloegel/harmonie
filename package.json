@@ -1,6 +1,6 @@
 {
   "name": "@davidfloegel/harmonie",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.1",
   "description": "A typescript music theory library",
   "main": "build/index.js",
   "module": "build/index.es.js",
@@ -11,9 +11,7 @@
     "lint": "eslint './src/**/*.ts'",
     "type-check": "tsc --noEmit"
   },
-  "files": [
-    "build"
-  ],
+  "files": ["build"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidfloegel/harmonie.git"
@@ -36,9 +34,7 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "setupFiles": [
-      "core-js"
-    ]
+    "setupFiles": ["core-js"]
   },
   "husky": {
     "hooks": {

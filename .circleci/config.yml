@@ -1,4 +1,5 @@
 version: 2.1
+
 orbs:
   node: circleci/node@1.1.6
 jobs:
@@ -13,7 +14,28 @@ jobs:
             - run: npm run lint
             - run: npm run type-check 
             - run: npm run test
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Chmod
+          command: chmod +x ~/repo/bin/publish.sh
+      - run:
+          name: Publish on NPM
+          command: ~/repo/bin/publish.sh
 workflows:
     build-and-test:
       jobs:
         - build-and-test
+        - deploy
+            requires:
+              - build-and-test
+            filters:
+              branches:
+                only:
+                  - master
