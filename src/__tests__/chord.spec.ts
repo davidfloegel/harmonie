@@ -17,12 +17,12 @@ describe('Chord', () => {
 
   describe('Triads', () => {
     const cases = {
-      '^': ['C', 'E', 'G'],
-      '-': ['C', 'Eb', 'G'],
-      '°': ['C', 'Eb', 'Gb'],
-      '+': ['C', 'E', 'G#'],
-      sus2: ['C', 'D', 'G'],
-      sus4: ['C', 'F', 'G'],
+      '^': ['C/4', 'E/4', 'G/4'],
+      '-': ['C/4', 'Eb/4', 'G/4'],
+      '°': ['C/4', 'Eb/4', 'Gb/4'],
+      '+': ['C/4', 'E/4', 'G#/4'],
+      sus2: ['C/4', 'D/4', 'G/4'],
+      sus4: ['C/4', 'F/4', 'G/4'],
     };
 
     genCases(cases);
@@ -30,12 +30,12 @@ describe('Chord', () => {
 
   describe('Four note chords', () => {
     const cases = {
-      '7': ['C', 'E', 'G', 'Bb'],
-      '^7': ['C', 'E', 'G', 'B'],
-      '-7': ['C', 'Eb', 'G', 'Bb'],
-      '°7': ['C', 'Eb', 'Gb', 'Bbb'],
-      Ø: ['C', 'Eb', 'Gb', 'Bb'],
-      '7sus4': ['C', 'F', 'G', 'Bb'],
+      '7': ['C/4', 'E/4', 'G/4', 'Bb/4'],
+      '^7': ['C/4', 'E/4', 'G/4', 'B/4'],
+      '-7': ['C/4', 'Eb/4', 'G/4', 'Bb/4'],
+      '°7': ['C/4', 'Eb/4', 'Gb/4', 'A/4'],
+      Ø: ['C/4', 'Eb/4', 'Gb/4', 'Bb/4'],
+      '7sus4': ['C/4', 'F/4', 'G/4', 'Bb/4'],
     };
 
     genCases(cases);
@@ -43,12 +43,12 @@ describe('Chord', () => {
 
   describe('Major Chord extensions', () => {
     const cases = {
-      6: ['C', 'E', 'G', 'A'],
-      add9: ['C', 'E', 'G', 'D'],
-      '6/9': ['C', 'E', 'G', 'A', 'D'],
-      '^9': ['C', 'E', 'G', 'B', 'D'],
-      '^7(#11)': ['C', 'E', 'G', 'B', 'F#'],
-      '^9(#11)': ['C', 'E', 'G', 'B', 'D', 'F#'],
+      6: ['C/4', 'E/4', 'G/4', 'A/4'],
+      add9: ['C/4', 'E/4', 'G/4', 'D/5'],
+      '6/9': ['C/4', 'E/4', 'G/4', 'A/4', 'D/5'],
+      '^9': ['C/4', 'E/4', 'G/4', 'B/4', 'D/5'],
+      '^7(#11)': ['C/4', 'E/4', 'G/4', 'B/4', 'F#/5'],
+      '^9(#11)': ['C/4', 'E/4', 'G/4', 'B/4', 'D/5', 'F#/5'],
     };
 
     genCases(cases);
@@ -56,12 +56,12 @@ describe('Chord', () => {
 
   describe('Minor Chord extensions', () => {
     const cases = {
-      '-6': ['C', 'Eb', 'G', 'A'],
-      '-(^7)': ['C', 'Eb', 'G', 'B'],
-      '-add9': ['C', 'Eb', 'G', 'D'],
-      '-9': ['C', 'Eb', 'G', 'Bb', 'D'],
-      '-9(^7)': ['C', 'Eb', 'G', 'B', 'D'],
-      '-11': ['C', 'Eb', 'G', 'Bb', 'D', 'F'],
+      '-6': ['C/4', 'Eb/4', 'G/4', 'A/4'],
+      '-(^7)': ['C/4', 'Eb/4', 'G/4', 'B/4'],
+      '-add9': ['C/4', 'Eb/4', 'G/4', 'D/5'],
+      '-9': ['C/4', 'Eb/4', 'G/4', 'Bb/4', 'D/5'],
+      '-9(^7)': ['C/4', 'Eb/4', 'G/4', 'B/4', 'D/5'],
+      '-11': ['C/4', 'Eb/4', 'G/4', 'Bb/4', 'D/5', 'F/5'],
     };
 
     genCases(cases);
@@ -69,12 +69,12 @@ describe('Chord', () => {
 
   describe('Seventh chords extensions', () => {
     const cases = {
-      '9': ['C', 'E', 'G', 'Bb', 'D'],
-      '13': ['C', 'E', 'G', 'Bb', 'D', 'A'],
-      '7(b9)': ['C', 'E', 'G', 'Bb', 'Db'],
-      '7(#9)': ['C', 'E', 'G', 'Bb', 'D#'],
-      '7(#11)': ['C', 'E', 'G', 'Bb', 'F#'],
-      '7(b13)': ['C', 'E', 'G', 'Bb', 'Ab'],
+      '9': ['C/4', 'E/4', 'G/4', 'Bb/4', 'D/5'],
+      '13': ['C/4', 'E/4', 'G/4', 'Bb/4', 'D/5', 'A/5'],
+      '7(b9)': ['C/4', 'E/4', 'G/4', 'Bb/4', 'Db/5'],
+      '7(#9)': ['C/4', 'E/4', 'G/4', 'Bb/4', 'D#/5'],
+      '7(#11)': ['C/4', 'E/4', 'G/4', 'Bb/4', 'F#/5'],
+      '7(b13)': ['C/4', 'E/4', 'G/4', 'Bb/4', 'Ab/5'],
     };
 
     genCases(cases);
@@ -82,8 +82,8 @@ describe('Chord', () => {
 
   describe('Augmented triads', () => {
     const cases = {
-      '+(^7)': ['C', 'E', 'G#', 'B'],
-      '+7': ['C', 'E', 'G#', 'Bb'],
+      '+(^7)': ['C/4', 'E/4', 'G#/4', 'B/4'],
+      '+7': ['C/4', 'E/4', 'G#/4', 'Bb/4'],
     };
 
     genCases(cases);
@@ -91,9 +91,9 @@ describe('Chord', () => {
 
   describe('Extended 7sus4 chords', () => {
     const cases = {
-      '9(sus4)': ['C', 'F', 'G', 'Bb', 'D'],
-      '13(sus4)': ['C', 'F', 'G', 'Bb', 'D', 'A'],
-      '7sus4(b9)': ['C', 'F', 'G', 'Bb', 'Db'],
+      '9(sus4)': ['C/4', 'F/4', 'G/4', 'Bb/4', 'D/5'],
+      '13(sus4)': ['C/4', 'F/4', 'G/4', 'Bb/4', 'D/5', 'A/5'],
+      '7sus4(b9)': ['C/4', 'F/4', 'G/4', 'Bb/4', 'Db/5'],
     };
 
     genCases(cases);
@@ -101,9 +101,9 @@ describe('Chord', () => {
 
   describe('Half-diminished chords', () => {
     const cases = {
-      '-11(b5)': ['C', 'Eb', 'Gb', 'Bb', 'F'],
-      'Ø7(b13)': ['C', 'Eb', 'Gb', 'Bb', 'Ab'],
-      'Ø7(9)': ['C', 'Eb', 'Gb', 'Bb', 'D'],
+      '-11(b5)': ['C/4', 'Eb/4', 'Gb/4', 'Bb/4', 'F/5'],
+      'Ø7(b13)': ['C/4', 'Eb/4', 'Gb/4', 'Bb/4', 'Ab/5'],
+      'Ø7(9)': ['C/4', 'Eb/4', 'Gb/4', 'Bb/4', 'D/5'],
     };
 
     genCases(cases);
@@ -113,67 +113,67 @@ describe('Chord', () => {
     it('instantiates a new chord in a given inversion', () => {
       const first = new Chord('C', '^', 1);
       expect(first.inversion).toBe(1);
-      expect(first.notes).toEqual(['E', 'G', 'C']);
+      expect(first.notes).toEqual(['E/4', 'G/4', 'C/5']);
 
       const second = new Chord('C', '^', 2);
       expect(second.inversion).toBe(2);
-      expect(second.notes).toEqual(['G', 'C', 'E']);
+      expect(second.notes).toEqual(['G/4', 'C/5', 'E/5']);
     });
 
     it('instantiates a new four note chord in a given inversion', () => {
       const first = new Chord('C', '^7', 1);
       expect(first.inversion).toBe(1);
-      expect(first.notes).toEqual(['E', 'G', 'B', 'C']);
+      expect(first.notes).toEqual(['E/4', 'G/4', 'B/4', 'C/5']);
 
       const second = new Chord('C', '^7', 2);
       expect(second.inversion).toBe(2);
-      expect(second.notes).toEqual(['G', 'B', 'C', 'E']);
+      expect(second.notes).toEqual(['G/4', 'B/4', 'C/5', 'E/5']);
 
       const third = new Chord('C', '^7', 3);
       expect(third.inversion).toBe(3);
-      expect(third.notes).toEqual(['B', 'C', 'E', 'G']);
+      expect(third.notes).toEqual(['B/4', 'C/5', 'E/5', 'G/5']);
     });
 
     it('cycles through the inversions of a triad', () => {
       const chord = new Chord('C');
 
       expect(chord.inversion).toBe(0);
-      expect(chord.notes).toEqual(['C', 'E', 'G']);
+      expect(chord.notes).toEqual(['C/4', 'E/4', 'G/4']);
 
       chord.invert();
       expect(chord.inversion).toBe(1);
-      expect(chord.notes).toEqual(['E', 'G', 'C']);
+      expect(chord.notes).toEqual(['E/4', 'G/4', 'C/5']);
 
       chord.invert();
       expect(chord.inversion).toBe(2);
-      expect(chord.notes).toEqual(['G', 'C', 'E']);
+      expect(chord.notes).toEqual(['G/4', 'C/5', 'E/5']);
 
       chord.invert();
       expect(chord.inversion).toBe(0);
-      expect(chord.notes).toEqual(['C', 'E', 'G']);
+      expect(chord.notes).toEqual(['C/4', 'E/4', 'G/4']);
     });
 
     it('cycles through the inversions of a four note chord', () => {
       const chord = new Chord('C', '^7');
 
       expect(chord.inversion).toBe(0);
-      expect(chord.notes).toEqual(['C', 'E', 'G', 'B']);
+      expect(chord.notes).toEqual(['C/4', 'E/4', 'G/4', 'B/4']);
 
       chord.invert();
       expect(chord.inversion).toBe(1);
-      expect(chord.notes).toEqual(['E', 'G', 'B', 'C']);
+      expect(chord.notes).toEqual(['E/4', 'G/4', 'B/4', 'C/5']);
 
       chord.invert();
       expect(chord.inversion).toBe(2);
-      expect(chord.notes).toEqual(['G', 'B', 'C', 'E']);
+      expect(chord.notes).toEqual(['G/4', 'B/4', 'C/5', 'E/5']);
 
       chord.invert();
       expect(chord.inversion).toBe(3);
-      expect(chord.notes).toEqual(['B', 'C', 'E', 'G']);
+      expect(chord.notes).toEqual(['B/4', 'C/5', 'E/5', 'G/5']);
 
       chord.invert();
       expect(chord.inversion).toBe(0);
-      expect(chord.notes).toEqual(['C', 'E', 'G', 'B']);
+      expect(chord.notes).toEqual(['C/4', 'E/4', 'G/4', 'B/4']);
     });
   });
 });

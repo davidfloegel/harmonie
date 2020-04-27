@@ -14,22 +14,24 @@ export const ScalesDict = {
 };
 
 export default class Scale {
-  name: string;
-  key: string;
-  scale: string;
-  notes: Note[] = [];
+  _name: string;
+  _tonic: string;
+  _scale: string;
+  _notes: string[] = [];
 
-  constructor(key: string, scale: string) {
+  constructor(tonic: string, scale: string) {
     if (!ScalesDict[scale]) {
       throw new Error(`Scale ${scale} is not valid`);
     }
 
-    this.name = `${key} ${scale}`;
-    this.key = key;
-    this.scale = scale;
+    // TODO validate tonic
+
+    this._name = `${tonic} ${scale}`;
+    this._tonic = tonic;
+    this._scale = scale;
 
     const intervalStructure = ScalesDict[scale];
-    const rootNote = new Note(key);
+    const rootNote = new Note(tonic);
     const notes = [
       ...intervalStructure.map(
         (interval: string) =>
@@ -37,6 +39,22 @@ export default class Scale {
       ),
       rootNote.addInterval(Interval.fromString('P8')).name,
     ];
-    this.notes = notes;
+    this._notes = notes;
+  }
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public get tonic(): string {
+    return this._tonic;
+  }
+
+  public get scale(): string {
+    return this._scale;
+  }
+
+  public get notes(): string[] {
+    return this._notes;
   }
 }

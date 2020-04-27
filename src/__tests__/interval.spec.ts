@@ -1,13 +1,13 @@
 import { Note, Interval } from '../';
 
 const noteAdd = (root: string, interval: string): string =>
-  new Note(root).addInterval(Interval.fromString(interval)).name;
+  new Note(root).addInterval(Interval.fromString(interval)).technicalName;
 
 const noteSub = (root: string, interval: string): string =>
-  new Note(root).subInterval(Interval.fromString(interval)).name;
+  new Note(root).subInterval(Interval.fromString(interval)).technicalName;
 
 const minusNote = (root: string, target: string): string =>
-  new Note(root).minusNote(new Note(target)).name;
+  new Note(root).intervalTo(new Note(target)).name;
 
 describe('Interval', () => {
   it('initialises a new interval with quality and quantity', () => {
@@ -71,36 +71,34 @@ describe('Interval', () => {
   });
 
   it('adds an interval to a root note', () => {
-    expect(noteAdd('C', 'P1')).toEqual('C');
-    expect(noteAdd('Eb', 'd4')).toEqual('Abb');
-    expect(noteAdd('Eb', 'm3')).toEqual('Gb');
-    expect(noteAdd('Eb', 'A2')).toEqual('F#');
-    expect(noteAdd('Eb', 'M2')).toEqual('F');
-    expect(noteAdd('Eb', 'd3')).toEqual('Gbb');
-    expect(noteAdd('D#', 'M3')).toEqual('F##');
-    expect(noteAdd('D#', 'd4')).toEqual('G');
+    expect(noteAdd('C', 'P1')).toEqual('C/4');
+    expect(noteAdd('Eb', 'd4')).toEqual('Abb/4');
+    expect(noteAdd('Eb', 'm3')).toEqual('Gb/4');
+    expect(noteAdd('Eb', 'A2')).toEqual('F#/4');
+    expect(noteAdd('Eb', 'M2')).toEqual('F/4');
+    expect(noteAdd('Eb', 'd3')).toEqual('Gbb/4');
+    expect(noteAdd('D#', 'M3')).toEqual('F##/4');
+    expect(noteAdd('D#', 'd4')).toEqual('G/4');
 
     // test octave adjustment
     const target = new Note('B').addInterval(Interval.fromString('M2'));
-    expect(target).toHaveProperty('name', 'C#');
-    expect(target).toHaveProperty('octave', 5);
+    expect(target).toHaveProperty('name', 'C#/5');
   });
 
   it('subtracts an interval from a root note', () => {
-    expect(noteSub('C', 'P1')).toEqual('C');
-    expect(noteSub('G', 'M3')).toEqual('Eb');
-    expect(noteSub('Abb', 'd4')).toEqual('Eb');
-    expect(noteSub('Gb', 'm3')).toEqual('Eb');
-    expect(noteSub('F#', 'A2')).toEqual('Eb');
-    expect(noteSub('F', 'M2')).toEqual('Eb');
-    expect(noteSub('Gbb', 'd3')).toEqual('Eb');
-    expect(noteSub('F##', 'M3')).toEqual('D#');
-    expect(noteSub('G', 'd4')).toEqual('D#');
+    expect(noteSub('C', 'P1')).toEqual('C/4');
+    expect(noteSub('G', 'M3')).toEqual('Eb/4');
+    expect(noteSub('Abb', 'd4')).toEqual('Eb/4');
+    expect(noteSub('Gb', 'm3')).toEqual('Eb/4');
+    expect(noteSub('F#', 'A2')).toEqual('Eb/4');
+    expect(noteSub('F', 'M2')).toEqual('Eb/4');
+    expect(noteSub('Gbb', 'd3')).toEqual('Eb/4');
+    expect(noteSub('F##', 'M3')).toEqual('D#/4');
+    expect(noteSub('G', 'd4')).toEqual('D#/4');
 
     // test octave adjustment
     const target = new Note('D').subInterval(Interval.fromString('P5'));
-    expect(target).toHaveProperty('name', 'G');
-    expect(target).toHaveProperty('octave', 3);
+    expect(target).toHaveProperty('name', 'G/3');
   });
 
   it('calculate interval between 2 notes ascending', () => {
@@ -112,7 +110,7 @@ describe('Interval', () => {
     expect(minusNote('C', 'G')).toEqual('P5');
     expect(minusNote('C', 'A')).toEqual('M6');
     expect(minusNote('C', 'B')).toEqual('M7');
-    expect(minusNote('C', 'C5')).toEqual('P8');
+    expect(minusNote('C', 'C/5')).toEqual('P8');
 
     // with accidentals
     expect(minusNote('C', 'Db')).toEqual('m2');
@@ -130,17 +128,17 @@ describe('Interval', () => {
     expect(minusNote('Eb', 'G')).toEqual('M3');
 
     // accross to octaves
-    expect(minusNote('Bb', 'C5')).toEqual('M2');
-    expect(minusNote('Bb', 'Db5')).toEqual('m3');
-    expect(minusNote('Bb', 'D5')).toEqual('M3');
-    expect(minusNote('Bb', 'Eb5')).toEqual('P4');
-    expect(minusNote('Bb', 'E5')).toEqual('A4');
-    expect(minusNote('Bb', 'F5')).toEqual('P5');
-    expect(minusNote('Bb', 'Gb5')).toEqual('m6');
-    expect(minusNote('Bb', 'G5')).toEqual('M6');
-    expect(minusNote('Bb', 'Ab5')).toEqual('m7');
-    expect(minusNote('Bb', 'A5')).toEqual('M7');
-    expect(minusNote('Bb', 'Bb5')).toEqual('P8');
+    expect(minusNote('Bb', 'C/5')).toEqual('M2');
+    expect(minusNote('Bb', 'Db/5')).toEqual('m3');
+    expect(minusNote('Bb', 'D/5')).toEqual('M3');
+    expect(minusNote('Bb', 'Eb/5')).toEqual('P4');
+    expect(minusNote('Bb', 'E/5')).toEqual('A4');
+    expect(minusNote('Bb', 'F/5')).toEqual('P5');
+    expect(minusNote('Bb', 'Gb/5')).toEqual('m6');
+    expect(minusNote('Bb', 'G/5')).toEqual('M6');
+    expect(minusNote('Bb', 'Ab/5')).toEqual('m7');
+    expect(minusNote('Bb', 'A/5')).toEqual('M7');
+    expect(minusNote('Bb', 'Bb/5')).toEqual('P8');
   });
 
   it('calculates interval between 2 notes descending', () => {
@@ -153,24 +151,24 @@ describe('Interval', () => {
     expect(minusNote('B', 'E')).toEqual('P5');
     expect(minusNote('B', 'D')).toEqual('M6');
     expect(minusNote('B', 'C')).toEqual('M7');
-    expect(minusNote('B', 'B3')).toEqual('P8');
+    expect(minusNote('B', 'B/3')).toEqual('P8');
 
     // across two octaves
-    expect(minusNote('C', 'B3')).toEqual('m2');
-    expect(minusNote('C', 'A3')).toEqual('m3');
-    expect(minusNote('C', 'G3')).toEqual('P4');
-    expect(minusNote('C', 'F3')).toEqual('P5');
-    expect(minusNote('C', 'E3')).toEqual('m6');
-    expect(minusNote('C', 'D3')).toEqual('m7');
-    expect(minusNote('C', 'C3')).toEqual('P8');
+    expect(minusNote('C', 'B/3')).toEqual('m2');
+    expect(minusNote('C', 'A/3')).toEqual('m3');
+    expect(minusNote('C', 'G/3')).toEqual('P4');
+    expect(minusNote('C', 'F/3')).toEqual('P5');
+    expect(minusNote('C', 'E/3')).toEqual('m6');
+    expect(minusNote('C', 'D/3')).toEqual('m7');
+    expect(minusNote('C', 'C/3')).toEqual('P8');
 
     // with accidentals
-    expect(minusNote('C', 'Bb3')).toEqual('M2');
-    expect(minusNote('C', 'Ab3')).toEqual('M3');
-    expect(minusNote('C', 'Gb3')).toEqual('A4');
-    expect(minusNote('C', 'Fb3')).toEqual('A5');
-    expect(minusNote('C', 'Eb3')).toEqual('M6');
-    expect(minusNote('C', 'Db3')).toEqual('M7');
+    expect(minusNote('C', 'Bb/3')).toEqual('M2');
+    expect(minusNote('C', 'Ab/3')).toEqual('M3');
+    expect(minusNote('C', 'Gb/3')).toEqual('A4');
+    expect(minusNote('C', 'Fb/3')).toEqual('A5');
+    expect(minusNote('C', 'Eb/3')).toEqual('M6');
+    expect(minusNote('C', 'Db/3')).toEqual('M7');
   });
 
   it('inverts a given interval', () => {

@@ -57,52 +57,77 @@ export const ChordsDict = {
   'Ø7(9)': ['P1', 'm3', 'd5', 'm7', 'M9'],
 };
 
-export default class Chord {
-  name: string;
-  root: string;
-  inversion = 0;
-  quality: string;
-  notes: string[] = [];
-  notesInRoot: string[] = [];
+class Chord {
+  private _name: string;
+  private _rootNote: string;
+  private _inversion = 0;
+  private _quality: string;
+  private _notes: string[] = [];
+  private _notesInRootPosition: string[] = [];
 
-  constructor(root: string, quality = '^', inversion = 0) {
+  constructor(rootNote: string, quality = '^', inversion = 0) {
     if (!ChordsDict[quality]) {
-      throw new Error(`Chord quality ${quality} is not valid`);
+      throw new Error(`Chord _quality ${quality} is not valid`);
     }
 
-    this.name = `${root} ${quality}`;
-    this.root = root;
-    this.quality = quality;
+    this._name = `${rootNote} ${quality}`;
+    this._rootNote = rootNote;
+    this._quality = quality;
 
     const intervalStructure = ChordsDict[quality];
-    const rootNote = new Note(root);
+    const root = new Note(rootNote);
     const notes = intervalStructure.map(
-      (interval: string) =>
-        rootNote.addInterval(Interval.fromString(interval)).name
+      (interval: string) => root.addInterval(Interval.fromString(interval)).name
     );
-    this.notes = notes;
-    this.notesInRoot = notes;
+    this._notes = notes;
+    this._notesInRootPosition = notes;
 
     if (inversion > 0) {
       this.invert(inversion);
     }
   }
 
-  invert(inversion?: number): string[] {
-    const currentInversion = this.inversion;
-    const notes = this.notesInRoot;
+  public get name(): string {
+    return this._name;
+  }
+
+  public get rootNote(): string {
+    return this._rootNote;
+  }
+
+  public get quality(): string {
+    return this._quality;
+  }
+
+  public get notes(): string[] {
+    return this._notes || [];
+  }
+
+  public get inversion(): number {
+    return this._inversion || 0;
+  }
+
+  public invert(inversion?: number): string[] {
+    const currentInversion = this._inversion;
+    const notes = this._notesInRootPosition;
     const isLast = notes.length - 1 === currentInversion;
     const nextInversion = isLast ? 0 : currentInversion + 1;
     const jumpToInversion = inversion || nextInversion;
 
     const newNotes = [
       ...notes.slice(jumpToInversion),
-      ...notes.slice(0, jumpToInversion),
+      ...notes.slice(0, jumpToInversion).map((note) => {
+        const tmp = new Note(note);
+        tmp.octave = tmp.octave + 1;
+        return tmp.name;
+      }),
     ];
 
-    this.inversion = jumpToInversion;
-    this.notes = newNotes;
+    this._inversion = jumpToInversion;
+    this._notes = newNotes;
 
     return newNotes;
   }
 }
+
+export default Chord;

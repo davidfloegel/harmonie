@@ -11,81 +11,73 @@ describe('Note', () => {
     }).toThrowError();
 
     expect(() => {
-      new Note('F11');
+      new Note('F/11');
+    }).toThrowError();
+
+    expect(() => {
+      new Note('F/');
     }).toThrowError();
   });
 
-  it('generates a note instance from semitones', () => {
-    expect(Note.fromIndex(1)).toHaveProperty('name', 'C');
-    expect(Note.fromIndex(2)).toHaveProperty('name', 'D');
-    expect(Note.fromIndex(3)).toHaveProperty('name', 'E');
-    expect(Note.fromIndex(4)).toHaveProperty('name', 'F');
-    expect(Note.fromIndex(5)).toHaveProperty('name', 'G');
-    expect(Note.fromIndex(6)).toHaveProperty('name', 'A');
-    expect(Note.fromIndex(7)).toHaveProperty('name', 'B');
-  });
-
   it("extracts the notes' letter without accidentals", () => {
-    expect(new Note('C')).toHaveProperty('letter', 'C');
-    expect(new Note('Eb')).toHaveProperty('letter', 'E');
+    expect(new Note('C')).toHaveProperty('_letter', 'C');
+    expect(new Note('Eb')).toHaveProperty('_letter', 'E');
   });
 
   it("extracts the notes' accidental string", () => {
-    expect(new Note('F')).toHaveProperty('accidentals.accidentals', '');
-    expect(new Note('Ab')).toHaveProperty('accidentals.accidentals', 'b');
-    expect(new Note('C##')).toHaveProperty('accidentals.accidentals', '##');
+    expect(new Note('F')).toHaveProperty('_accidentals.accidentals', '');
+    expect(new Note('Ab')).toHaveProperty('_accidentals.accidentals', 'b');
+    expect(new Note('C##')).toHaveProperty('_accidentals.accidentals', '##');
   });
 
   it("extracts the notes' octave", () => {
-    expect(new Note('F')).toHaveProperty('octave', 4);
-    expect(new Note('C5')).toHaveProperty('octave', 5);
-    expect(new Note('F#2')).toHaveProperty('octave', 2);
-    expect(new Note('Eb3')).toHaveProperty('octave', 3);
+    expect(new Note('F')).toHaveProperty('_octave', 4);
+    expect(new Note('C/5')).toHaveProperty('_octave', 5);
+    expect(new Note('F#/2')).toHaveProperty('_octave', 2);
+    expect(new Note('Eb/3')).toHaveProperty('_octave', 3);
   });
 
   it('it calculates the midi value for the note', () => {
     expect(new Note('C')).toHaveProperty('midiValue', 60);
     expect(new Note('Eb')).toHaveProperty('midiValue', 63);
-    expect(new Note('Bb5')).toHaveProperty('midiValue', 82);
-    expect(new Note('A#3')).toHaveProperty('midiValue', 58);
+    expect(new Note('Bb/5')).toHaveProperty('midiValue', 82);
+    expect(new Note('A#/3')).toHaveProperty('midiValue', 58);
   });
 
   it('calculates the easier to read version for a note', () => {
     // Notes that don't get enharmonic equivalent
-    expect(new Note('C').easyNotation).toBe(null);
-    expect(new Note('Bb').easyNotation).toBe(null);
-    expect(new Note('F#').easyNotation).toBe(null);
+    expect(new Note('C').name).toBe('C/4');
+    expect(new Note('Bb').name).toBe('Bb/4');
+    expect(new Note('F#').name).toBe('F#/4');
 
     // octave changing alternatives
-    expect(new Note('Cb')).toHaveProperty('easyNotation.name', 'B');
-    expect(new Note('Cb')).toHaveProperty('easyNotation.octave', 3);
+    expect(new Note('Cb')).toHaveProperty('name', 'B/3');
 
-    expect(new Note('Cbb')).toHaveProperty('easyNotation.name', 'Bb');
-    expect(new Note('Cbbb')).toHaveProperty('easyNotation.name', 'A');
+    expect(new Note('Cbb')).toHaveProperty('name', 'Bb/3');
+    expect(new Note('Cbbb')).toHaveProperty('name', 'A/3');
 
-    expect(new Note('B#')).toHaveProperty('easyNotation.name', 'C');
-    expect(new Note('B#')).toHaveProperty('easyNotation.octave', 5);
+    expect(new Note('B#')).toHaveProperty('name', 'C/5');
 
-    expect(new Note('Bx')).toHaveProperty('easyNotation.name', 'C#');
-    expect(new Note('B#x')).toHaveProperty('easyNotation.name', 'D');
+    expect(new Note('Bx')).toHaveProperty('name', 'C#/5');
+    expect(new Note('B#x')).toHaveProperty('name', 'D/5');
 
     // easy examples
-    expect(new Note('Fb')).toHaveProperty('easyNotation.name', 'E');
-    expect(new Note('Fbb')).toHaveProperty('easyNotation.name', 'Eb');
-    expect(new Note('Fbbb')).toHaveProperty('easyNotation.name', 'D');
-    expect(new Note('E#')).toHaveProperty('easyNotation.name', 'F');
-    expect(new Note('Ex')).toHaveProperty('easyNotation.name', 'F#');
-    expect(new Note('E##')).toHaveProperty('easyNotation.name', 'F#');
-    expect(new Note('E#x')).toHaveProperty('easyNotation.name', 'G');
-    expect(new Note('E###')).toHaveProperty('easyNotation.name', 'G');
+    expect(new Note('Fb')).toHaveProperty('name', 'E/4');
+    expect(new Note('Fbb')).toHaveProperty('name', 'Eb/4');
+    expect(new Note('Fbbb')).toHaveProperty('name', 'D/4');
+    expect(new Note('E#')).toHaveProperty('name', 'F/4');
+    expect(new Note('Ex')).toHaveProperty('name', 'F#/4');
+    expect(new Note('E##')).toHaveProperty('name', 'F#/4');
+    expect(new Note('E#x')).toHaveProperty('name', 'G/4');
+    expect(new Note('E###')).toHaveProperty('name', 'G/4');
 
     // more easy ones
-    expect(new Note('Abb')).toHaveProperty('easyNotation.name', 'G');
-    expect(new Note('Abbb')).toHaveProperty('easyNotation.name', 'Gb');
-    expect(new Note('G##')).toHaveProperty('easyNotation.name', 'A');
-    expect(new Note('Gx')).toHaveProperty('easyNotation.name', 'A');
-    expect(new Note('G###')).toHaveProperty('easyNotation.name', 'A#');
-    expect(new Note('G#x')).toHaveProperty('easyNotation.name', 'A#');
+    expect(new Note('Abb')).toHaveProperty('name', 'G/4');
+    expect(new Note('Abbb')).toHaveProperty('name', 'Gb/4');
+    expect(new Note('G##')).toHaveProperty('name', 'A/4');
+    expect(new Note('Gx')).toHaveProperty('name', 'A/4');
+    expect(new Note('G###')).toHaveProperty('name', 'A#/4');
+    expect(new Note('G#x')).toHaveProperty('name', 'A#/4');
   });
 
   it('tests enharmonic comparison', () => {
