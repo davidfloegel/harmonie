@@ -1,6 +1,10 @@
 import Note from './note';
 import Interval from './interval';
 
+// TODO create a structure like this so we can access chords by different names as well
+// {
+//   '^': { name: 'Major', altNames: [''], structure: []}
+// }
 export const ChordsDict = {
   // triads
   '^': ['P1', 'M3', 'P5'],
