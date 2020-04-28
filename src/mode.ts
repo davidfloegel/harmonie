@@ -4,7 +4,7 @@ import Interval from './interval';
 export const ModesDict = {
   'Major Pentatonic': ['P1', 'M2', 'M3', 'P5', 'M6'],
   'Minor Pentatonic': ['P1', 'm3', 'P4', 'P5', 'm7'],
-  'Major': ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7'],
+  Major: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7'],
   'Natural Minor': ['P1', 'M2', 'm3', 'P4', 'P5', 'm6', 'm7'],
   Ionian: ['P1', 'M2', 'M3', 'P4', 'P5', 'M6', 'M7'],
   Dorian: ['P1', 'M2', 'm3', 'P4', 'P5', 'M6', 'm7'],
