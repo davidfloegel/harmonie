@@ -56,18 +56,19 @@ export default class Mode {
   _notes: string[] = [];
 
   constructor(tonic: string, name: string) {
-    const mode = findKey(ModesDict, name);
-    if (!mode) {
-      throw new Error(`Mode ${mode} is not valid`);
+    const modeKey = findKey(ModesDict, name);
+    if (!modeKey && !ModesDict[name]) {
+      throw new Error(`Mode ${modeKey || name} is not valid`);
     }
 
     // TODO validate tonic
 
-    this._name = `${tonic} ${mode}`;
+    this._name = `${tonic} ${modeKey || name}`;
     this._tonic = tonic;
-    this._mode = mode;
+    this._mode = modeKey || name;
 
-    const intervalStructure = ModesDict[mode].intervalStructure;
+    const getMode = modeKey ? ModesDict[modeKey] : ModesDict[name];
+    const intervalStructure = getMode.intervalStructure;
     const rootNote = new Note(tonic);
     const notes = [
       ...intervalStructure.map(
