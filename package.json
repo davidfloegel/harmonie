@@ -1,6 +1,6 @@
 {
   "name": "@davidfloegel/harmonie",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "A typescript music theory library",
   "main": "build/index.js",
   "module": "build/index.es.js",
