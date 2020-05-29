@@ -83,6 +83,9 @@ describe('Interval', () => {
     // test octave adjustment
     const target = new Note('B').addInterval(Interval.fromString('M2'));
     expect(target).toHaveProperty('name', 'C#/5');
+
+    const target2 = new Note('F#').addInterval(Interval.fromString('M7'));
+    expect(target2).toHaveProperty('name', 'F/5');
   });
 
   it('subtracts an interval from a root note', () => {

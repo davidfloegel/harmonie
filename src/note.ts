@@ -71,7 +71,7 @@ class Note {
     let newNotePos = semitones + accidentalVal;
 
     // check if a note exists
-    let newNote = this.fromSemitones(newNotePos);
+    let newNote = this.fromSemitones(newNotePos, _octave);
 
     if (newNote) {
       return [

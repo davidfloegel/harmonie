@@ -113,4 +113,17 @@ describe('Mode', () => {
       'C/5',
     ]);
   });
+
+  it('generates the notes for a F# Major Mode', () => {
+    expect(new Mode('F#', 'Major').notes).toEqual([
+      'F#/4',
+      'G#/4',
+      'A#/4',
+      'B/4',
+      'C#/5',
+      'D#/5',
+      'F/5',
+      'F#/5',
+    ]);
+  });
 });
