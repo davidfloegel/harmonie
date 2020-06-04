@@ -126,4 +126,41 @@ describe('Mode', () => {
       'F#/5',
     ]);
   });
+
+  it('returns inverts the direction of a scale', () => {
+    expect(new Mode('C/5', 'Major', 'desc').notes).toEqual([
+      'C/5',
+      'B/4',
+      'A/4',
+      'G/4',
+      'F/4',
+      'E/4',
+      'D/4',
+      'C/4',
+    ]);
+  });
+
+  it('returns the full name of the mode', () => {
+    expect(new Mode('C', 'Major').name).toEqual('C Major');
+  });
+
+  it('returns the tonic of the mode', () => {
+    expect(new Mode('C', 'Major').tonic).toEqual('C');
+  });
+
+  it('returns the mode name of the mode', () => {
+    expect(new Mode('C', 'Major').mode).toEqual('Major');
+  });
+
+  it('returns the interval structure of the mode', () => {
+    expect(new Mode('C', 'Major').intervalStructure).toEqual([
+      'P1',
+      'M2',
+      'M3',
+      'P4',
+      'P5',
+      'M6',
+      'M7',
+    ]);
+  });
 });

@@ -54,8 +54,9 @@ export default class Mode {
   _tonic: string;
   _mode: string;
   _notes: string[] = [];
+  _intervalStructure: string[];
 
-  constructor(tonic: string, name: string) {
+  constructor(tonic: string, name: string, direction = 'asc') {
     const modeKey = findKey(ModesDict, name);
     if (!modeKey && !ModesDict[name]) {
       throw new Error(`Mode ${modeKey || name} is not valid`);
@@ -70,6 +71,11 @@ export default class Mode {
     const getMode = modeKey ? ModesDict[modeKey] : ModesDict[name];
     const intervalStructure = getMode.intervalStructure;
     const rootNote = new Note(tonic);
+
+    if (direction === 'desc') {
+      rootNote.octave = rootNote.octave - 1;
+    }
+
     const notes = [
       ...intervalStructure.map(
         (interval: string) =>
@@ -77,7 +83,8 @@ export default class Mode {
       ),
       rootNote.addInterval(Interval.fromString('P8')).name,
     ];
-    this._notes = notes;
+    this._notes = direction === 'desc' ? notes.reverse() : notes;
+    this._intervalStructure = intervalStructure;
   }
 
   public get name(): string {
@@ -94,5 +101,9 @@ export default class Mode {
 
   public get notes(): string[] {
     return this._notes;
+  }
+
+  public get intervalStructure(): string[] {
+    return this._intervalStructure;
   }
 }
