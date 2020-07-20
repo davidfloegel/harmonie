@@ -54,6 +54,7 @@ export default class Mode {
   _tonic: string;
   _mode: string;
   _notes: string[] = [];
+  _actualNotes: string[] = [];
   _intervalStructure: string[];
 
   constructor(tonic: string, name: string, direction = 'asc') {
@@ -79,7 +80,7 @@ export default class Mode {
     const notes = [
       ...intervalStructure.map(
         (interval: string) =>
-          rootNote.addInterval(Interval.fromString(interval)).name
+          rootNote.addInterval(Interval.fromString(interval)).technicalName
       ),
       rootNote.addInterval(Interval.fromString('P8')).name,
     ];
