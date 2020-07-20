@@ -3,6 +3,7 @@ import { SHARP, DOUBLE_SHARP } from './music';
 export default class Accidental {
   sanitised: string[];
   accidentals: string;
+  short: string;
   value: number;
 
   constructor(accidentals = '') {
@@ -17,6 +18,7 @@ export default class Accidental {
     this.sanitised = this.sanitise(split);
     this.accidentals = accidentals;
     this.value = this.calcValue();
+    this.short = this.calcShort(this.sanitised);
   }
 
   sanitise(accidentalsList: string[]): string[] {
@@ -27,6 +29,17 @@ export default class Accidental {
     }
 
     return accidentalsList;
+  }
+
+  calcShort(accidentalsList: string[]): string {
+    if (accidentalsList.indexOf(SHARP) > -1) {
+      const length = accidentalsList.length;
+      const doubleSharps = Math.floor(length / 2);
+      const sharps = length - doubleSharps * 2;
+      return `${SHARP.repeat(sharps)}${DOUBLE_SHARP.repeat(doubleSharps)}`;
+    }
+
+    return accidentalsList.join('');
   }
 
   calcValue(): number {

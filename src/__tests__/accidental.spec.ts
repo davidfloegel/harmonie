@@ -26,6 +26,17 @@ describe('Accidental', () => {
     expect(a).toHaveProperty('value', 3);
   });
 
+  it('shortens double sharp (##) into x', () => {
+    const a = new Accidental('##');
+    expect(a).toHaveProperty('short', 'x');
+
+    const b = new Accidental('###');
+    expect(b).toHaveProperty('short', '#x');
+
+    const c = new Accidental('bb');
+    expect(c).toHaveProperty('short', 'bb');
+  });
+
   it('calculates adjustment value for intervals', () => {
     const a = new Accidental();
     expect(a.value).toBe(0);

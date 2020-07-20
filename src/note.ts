@@ -33,7 +33,7 @@ class Note {
   }
 
   public get technicalName(): string {
-    return `${this._letter}${this._accidentals.accidentals}/${this._octave}`;
+    return `${this._letter}${this._accidentals.short}/${this._octave}`;
   }
 
   public get midiValue(): number {

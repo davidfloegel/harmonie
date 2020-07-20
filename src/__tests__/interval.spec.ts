@@ -77,7 +77,7 @@ describe('Interval', () => {
     expect(noteAdd('Eb', 'A2')).toEqual('F#/4');
     expect(noteAdd('Eb', 'M2')).toEqual('F/4');
     expect(noteAdd('Eb', 'd3')).toEqual('Gbb/4');
-    expect(noteAdd('D#', 'M3')).toEqual('F##/4');
+    expect(noteAdd('D#', 'M3')).toEqual('Fx/4');
     expect(noteAdd('D#', 'd4')).toEqual('G/4');
 
     // test octave adjustment
